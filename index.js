@@ -126,27 +126,39 @@
 let summan= document.getElementById("sum")
 let kort= document.getElementById("card")
 let messageel= document.getElementById("message")
+let playerel = document.getElementById("player-el")
 
 function getrandomnumner(){
-    return 5
-
+    return Math.floor(Math.random() * 10) + 1;
 }
-let one= getrandomnumner()
-let two= getrandomnumner()
-let cards= [one, two]
+
+let cards= []  
+let player={ name: "per", chips: 145,
+sayhellow: function (){
+    console.log("hej")
+}}
 let hasbl= false
-let summm= one + two 
-let isalive=true
+let summm= 0
+let isalive=false
 let message= true
+playerel.textContent= player.name + "$"+ player.chips
 
 
 
+function randomdie(){
+    let number= Math.floor(Math.random() * 13) + 1;
+    if(number <10) {
+        return 10
+    }else if (number=== 1 ){
+        return 11
+    } else return number
+}
 
 
 function rendergame(){
     kort.textContent= "Cards :"  
     for(let i= 0; i<cards.length; i++){
-        kort.textContent +=cards[i] + ","
+        kort.textContent +=cards[i] + " "
     }
     summan.textContent = "sum:" + summm
 
@@ -161,42 +173,33 @@ function rendergame(){
     } else {
         message="do you want to dram a new card?"
     
-        isalive=false
+        isalive=true
     }
     messageel.textContent=message
     
 }
 
 function Newcard(){
-    console.log("drawing out a new card")
     
-    let card =getrandomnumner()
+    if( isalive== true && hasbl== false){
+        let card =getrandomnumner()
      summm+= card
-     cards.push(card)
          
          rendergame()
+    } 
 }
 function startgame(){
+    let one= getrandomnumner()
+let two= getrandomnumner()
+cards=[one, two]
+summm +=one + two
+    isalive=true
     rendergame()
 }
 
 
 
-let player= 102
-let player2= 107
-function getfas(){
-    if(player < player2){
-        return player
-    } else if (player2 < player){
-        return player2
-    } else{
-        return "lika"
-    }
-}
 
 
-function totalracetime(){
-   return  player+ player2
-}
-let final= totalracetime()
-console.log(final)
+
+
